@@ -30,12 +30,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -51,54 +47,27 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Dummy Op Mode", group="Linear Opmode")
-public class DummyOpMode extends LinearOpMode {
+@Autonomous(name="Dummy Op Mode 4", group="Linear Opmode")
+public class DummyOpMode4 extends LinearOpMode {
 
-    // Declare OpMode members.
-    private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
 
-        runtime.reset();
-        ProgrammingBot robot = new ProgrammingBot(this);
+        ProgrammingBot4 robot = new ProgrammingBot4(this);
         robot.initialize();
-
-        telemetry.addData("Status", "Initialized - " + runtime.toString());
-        telemetry.update();
-
-
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        runtime.reset();
 
-        robot.DumDrive(.25);
+        robot.PidDrive(24);
         sleep(1000);
-        robot.stopDriving();
-        sleep(1000);
-
-        robot.DumDrive(-.25);
-        sleep(1000);
-        robot.stopDriving();
+        robot.PidDrive(-24);
         sleep(1000);
 
-        robot.turnLeft(90, .25);
+        robot.drive(24, 1);
         sleep(1000);
-        robot.turnRight(90, .25);
+        robot.drive(-24, 1);
         sleep(1000);
-        robot.drive(12, .25);
-        sleep(1000);
-        robot.turnRight(90, .25);
-        robot.turnRight(90, .25);
-        sleep(1000);
-        robot.drive(12,.25);
-        sleep(1000);
-        robot.drive(-12, .25);
-
-        // Show the elapsed game time and wheel power.
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-        telemetry.update();
     }
 }

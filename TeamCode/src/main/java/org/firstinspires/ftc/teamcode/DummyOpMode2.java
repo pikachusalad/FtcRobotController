@@ -30,12 +30,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -51,8 +47,8 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Dummy Op Mode", group="Linear Opmode")
-public class DummyOpMode extends LinearOpMode {
+@Autonomous(name="Dummy Op Mode Too", group="Linear Opmode")
+public class DummyOpMode2 extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -61,7 +57,7 @@ public class DummyOpMode extends LinearOpMode {
     public void runOpMode() {
 
         runtime.reset();
-        ProgrammingBot robot = new ProgrammingBot(this);
+        ProgrammingBot2 robot = new ProgrammingBot2(this);
         robot.initialize();
 
         telemetry.addData("Status", "Initialized - " + runtime.toString());
@@ -73,12 +69,12 @@ public class DummyOpMode extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        robot.DumDrive(.25);
+        robot.dumDrive(.25);
         sleep(1000);
         robot.stopDriving();
         sleep(1000);
 
-        robot.DumDrive(-.25);
+        robot.dumDrive(-.25);
         sleep(1000);
         robot.stopDriving();
         sleep(1000);
