@@ -29,10 +29,13 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -48,55 +51,66 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Dummy Op Mode 3", group="Linear Opmode")
+@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
 @Disabled
-public class DummyOpMode3 extends LinearOpMode {
+public class robot_code_3 extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor leftDrive = null;
+
+
+
+    public DcMotor frontr = null;
+    public DcMotor frontl = null;
+    public DcMotor backr = null;
+    public DcMotor backl = null;
+
+
 
     @Override
     public void runOpMode() {
 
-        runtime.reset();
-        ProgrammingBot3 robot = new ProgrammingBot3(this);
-        robot.initialize();
 
-        telemetry.addData("Status", "Initialized - " + runtime.toString());
-        telemetry.update();
 
+        frontr  = hardwareMap.get(DcMotor.class, "frontr");
+        frontl  = hardwareMap.get(DcMotor.class, "frontl");
+        backr  = hardwareMap.get(DcMotor.class, "backr");
+        backl  = hardwareMap.get(DcMotor.class, "backl");
+
+        frontl.setDirection(DcMotor.Direction.FORWARD);
+        backl.setDirection(DcMotor.Direction.FORWARD);
+        frontr.setDirection(DcMotor.Direction.REVERSE);
+        backr.setDirection(DcMotor.Direction.REVERSE);
+        double Turn =1;
+        double Turn_2 = -.5;
+        double Forword = 1;
+        double Backword = -.5;
 
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 
-        robot.DumDrive(.25);
-        sleep(1000);
-        robot.stopDriving();
-        sleep(1000);
+        //run forward
 
-        robot.DumDrive(-.25);
-        sleep(1000);
-        robot.stopDriving();
-        sleep(1000);
+        frontl.setPower(Forword);
+        frontr.setPower(Forword);
+        backl.setPower(Forword);
+        backr.setPower(Forword);
 
-        robot.turnLeft(90, .25);
-        sleep(1000);
-        robot.turnRight(90, .25);
-        sleep(1000);
-        robot.drive(12, .25);
-        sleep(1000);
-        robot.turnRight(90, .25);
-        robot.turnRight(90, .25);
-        sleep(1000);
-        robot.drive(12,.25);
-        sleep(1000);
-        robot.drive(-12, .25);
+        sleep(3000);
+        //run backwards
 
-        // Show the elapsed game time and wheel power.
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-        telemetry.update();
+        frontl.setPower(Backword);
+        frontr.setPower(Backword);
+        backl.setPower(Backword);
+        backr.setPower(Backword);
+
+        sleep(3000);
+        //spin right
+        //spin left
+
+
     }
 }

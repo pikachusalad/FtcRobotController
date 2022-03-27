@@ -32,7 +32,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -48,55 +51,65 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Dummy Op Mode 3", group="Linear Opmode")
-@Disabled
-public class DummyOpMode3 extends LinearOpMode {
+@Autonomous(name="spinnyForwardyChallengeOfCool123Gamer", group="Linear Opmode")
+
+public class spinnyForwardyChallengeOfCool123Gamer extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor FL = null;
+    private DcMotor FR = null;
+    private DcMotor BL = null;
+    private DcMotor BR = null;
 
     @Override
     public void runOpMode() {
-
-        runtime.reset();
-        ProgrammingBot3 robot = new ProgrammingBot3(this);
-        robot.initialize();
-
-        telemetry.addData("Status", "Initialized - " + runtime.toString());
+        telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        // Initialize the hardware variables. Note that the strings used here as parameters
+        // to 'get' must correspond to the names assigned during the robot configuration
+        // step (using the FTC Robot Controller app on the phone).
+        FL  = hardwareMap.get(DcMotor.class, "FL");
+        FR = hardwareMap.get(DcMotor.class, "FR");
+        BL  = hardwareMap.get(DcMotor.class, "BL");
+        BR = hardwareMap.get(DcMotor.class, "BR");
 
+
+        // Most robots need the motor on one side to be reversed to drive forward
+        // Reverse the motor that runs backwards when connected directly to the battery
+        FL.setDirection(DcMotor.Direction.FORWARD);
+        FR.setDirection(DcMotor.Direction.REVERSE);
+        BL.setDirection(DcMotor.Direction.FORWARD);
+        BR.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
-
-        robot.DumDrive(.25);
-        sleep(1000);
-        robot.stopDriving();
-        sleep(1000);
-
-        robot.DumDrive(-.25);
-        sleep(1000);
-        robot.stopDriving();
-        sleep(1000);
-
-        robot.turnLeft(90, .25);
-        sleep(1000);
-        robot.turnRight(90, .25);
-        sleep(1000);
-        robot.drive(12, .25);
-        sleep(1000);
-        robot.turnRight(90, .25);
-        robot.turnRight(90, .25);
-        sleep(1000);
-        robot.drive(12,.25);
-        sleep(1000);
-        robot.drive(-12, .25);
-
-        // Show the elapsed game time and wheel power.
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-        telemetry.update();
+//1000 milliseconds is one second.
+        //go forward for 3 seconds
+        FL.setPower(1);
+        FR.setPower(1);
+        BL.setPower(1);
+        BR.setPower(1);
+        sleep(3000);
+        //go backwards for 3 seconds
+        FL.setPower(-1);
+        FR.setPower(-1);
+        BL.setPower(-1);
+        BR.setPower(-1);
+        sleep(3000);
+        //spin right? fast
+        FL.setPower(1);
+        BL.setPower(1);
+        FR.setPower(-1);
+        BR.setPower(-1);
+        sleep(3000);
+        //spin left? slow
+        FL.setPower(-0.2);
+        BL.setPower(-0.2);
+        FR.setPower(0.2);
+        BR.setPower(0.2);
+        sleep(3000);
     }
 }

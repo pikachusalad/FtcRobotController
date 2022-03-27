@@ -52,6 +52,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @Autonomous(name="Dummy Op Mode", group="Linear Opmode")
+@Disabled
 public class DummyOpMode extends LinearOpMode {
 
     // Declare OpMode members.
